@@ -1,4 +1,4 @@
-package org.example.more.middle_test.StudyGroup.week1;
+package org.example.more.StudyGroup.week1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
