@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.more.middle_test.StudyGroup.week1.StringCountTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-13T12:02:50" hostname="DESKTOP-IMUD1RQ" time="0.111">
-  <properties/>
-  <testcase name="'KKHSSSSSSSE' =&gt; 'K1HS6E'" classname="org.example.more.middle_test.StudyGroup.week1.StringCountTest" time="0.111"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
