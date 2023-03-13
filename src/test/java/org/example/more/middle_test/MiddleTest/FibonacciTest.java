@@ -37,4 +37,6 @@ class FibonacciTest {
         assertThat(new Fibonacci().evenSum(50000000)).isEqualTo(19544084L);
     }
 
+
+
 }
