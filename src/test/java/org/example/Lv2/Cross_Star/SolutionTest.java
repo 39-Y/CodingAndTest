@@ -13,7 +13,9 @@ class SolutionTest {
     @DisplayName("[[1, -1, 0], [2, -1, 0]]의 교점은 (0, 0)")
     void t1(){
         coordinate = new int[][]{{1, -1, 0}, {2, -1, 0}};
-        Assertions.assertThat(new Solution().calcIntersectionPoint(coordinate[0], coordinate[1])).isEqualTo(new double[]{0, 0});
+        //Assertions.assertThat(Pointer.of(1d,1d)).isEqualTo(Pointer.of(1d,1d));
+
+        Assertions.assertThat(new Solution().calcIntersectionPoint(coordinate[0], coordinate[1])).isEqualTo(Pointer.of(0d,0d));
     }
 
     @Test
