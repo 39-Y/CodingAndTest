@@ -75,7 +75,16 @@ public class MyHashMap <T,F>{
     }
 
     public boolean containsValue(F value) {
-        return true;
+        for(List<Object[]> list:hashArr){
+            if(list.size()!=0){
+                for(int i=0; i<list.size(); i++){
+                    Object[] node = list.get(i);
+                    if(((F)node[1]).equals((F)value))
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void clear() {
