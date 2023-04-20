@@ -3,7 +3,7 @@ package org.example.more.myHashMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyHashMap <T,F>{
+public class MyHashMap <K,V>{
     int size;
     List[] hashArr;
 
@@ -19,12 +19,12 @@ public class MyHashMap <T,F>{
         }
     }
 
-    public F put(T key, F value) {
+    public V put(K key, V value) {
         Object[] currentNode = getNodeAndIndex(key);
-        F preValue;
+        V preValue;
         int hashKey = key.hashCode()%12;
         if(currentNode !=null){
-            preValue = (F)currentNode[1];
+            preValue = (V)currentNode[1];
             currentNode[1] = value;
         }
         else{
@@ -35,16 +35,16 @@ public class MyHashMap <T,F>{
         return preValue;
     }
 
-    public F get(T key){
+    public V get(K key){
         Object[] node = getNodeAndIndex(key);
-        return node==null? null : (F)node[1];
+        return node==null? null : (V)node[1];
     }
-    private Object[] getNodeAndIndex(T key){
+    private Object[] getNodeAndIndex(K key){
         List<Object[]> nodes = getSameHashcodeNodes(key);
         if(nodes.size()!=0){
             for(int i=0; i<nodes.size(); i++){
                 Object[] node = nodes.get(i);
-                if(((T)node[0]).equals((T)key))
+                if(((K)node[0]).equals((K)key))
                     return new Object[]{node[0], node[1], i};
             }
         }
@@ -56,30 +56,30 @@ public class MyHashMap <T,F>{
         return size;
     }
 
-    private List<Object[]> getSameHashcodeNodes(T key){
+    private List<Object[]> getSameHashcodeNodes(K key){
         return hashArr[key.hashCode()%12];
     }
 
-    public F remove(T key) {
+    public V remove(K key) {
         List<Object[]> nodes = getSameHashcodeNodes(key);
         Object[] nodeAndIdx = getNodeAndIndex(key);
         if(nodeAndIdx == null)
             return null;
         nodes.remove((int) nodeAndIdx[2]);
         --size;
-        return (F)nodeAndIdx[1];
+        return (V)nodeAndIdx[1];
     }
 
-    public boolean containsKey(T key) {
+    public boolean containsKey(K key) {
         return getNodeAndIndex(key) != null;
     }
 
-    public boolean containsValue(F value) {
+    public boolean containsValue(V value) {
         for(List<Object[]> list:hashArr){
             if(list.size()!=0){
                 for(int i=0; i<list.size(); i++){
                     Object[] node = list.get(i);
-                    if(((F)node[1]).equals((F)value))
+                    if(((V)node[1]).equals((V)value))
                         return true;
                 }
             }
