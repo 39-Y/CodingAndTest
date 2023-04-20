@@ -35,4 +35,11 @@ class q1_CatchTheCowTest {
         Assertions.assertThat(new q1_CatchTheCow(3,8).find()).isEqualTo(1);
 
     }
+
+    @Test
+    @DisplayName("man:5 // cow:12 => 2")
+    void t5(){
+        Assertions.assertThat(new q1_CatchTheCow(5,12).find()).isEqualTo(2);
+
+    }
 }
