@@ -8,13 +8,16 @@ public class MyHashMap <T,F>{
     List[] hashArr;
 
     public MyHashMap() {
+        init();
+    }
+
+    private void init(){
         size=0;
         hashArr = new List[12];
         for(int i=0; i<12; i++){
             hashArr[i]=new ArrayList<Object[]>();
         }
     }
-
 
     public F put(T key, F value) {
         Object[] currentNode = getNodeAndIndex(key);
@@ -69,5 +72,17 @@ public class MyHashMap <T,F>{
 
     public boolean containsKey(T key) {
         return getNodeAndIndex(key) != null;
+    }
+
+    public boolean containsValue(F value) {
+        return true;
+    }
+
+    public void clear() {
+        init();
+    }
+
+    public boolean isEmpty() {
+        return size==0;
     }
 }

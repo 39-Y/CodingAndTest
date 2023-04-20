@@ -3,6 +3,9 @@ package org.example.more.myHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyHashMapTest {
@@ -57,6 +60,23 @@ class MyHashMapTest {
         map.put("Key2", 2);
         assertTrue(map.containsKey("Key1"));
         assertFalse(map.containsKey("Key3"));
+    }
+    @Test
+    void testContainsValue() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        assertTrue(map.containsValue(1));
+        assertFalse(map.containsValue(3));
+    }
+
+    @Test
+    void testClear() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        map.put("Key3", 3);
+        map.clear();
+        assertEquals(0, map.size());
+        assertTrue(map.isEmpty());
     }
 
 }

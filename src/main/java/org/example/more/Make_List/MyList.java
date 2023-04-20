@@ -17,6 +17,17 @@ public class MyList<T> {
         return true;
     }
 
+    public boolean add(int idx, T element) {
+        if(++size == arr.length)
+            expends();
+        for(int i=size-1; i>=idx; i--){
+            arr[i]=arr[i-1];
+        }
+        arr[idx]=element;
+        arr[size++]=element;
+        return get(idx).equals(element);
+    }
+
     private void expends() {
         T[] newArr = (T[]) new Object[arr.length*2];
         int i=0;
