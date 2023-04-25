@@ -1,58 +1,80 @@
 package org.example.Lv2.joyStick;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 
 public class Solution {
     int count = 0;
-    String newName;
+    char[] newNameArr;
+
 
     public int solution(String newName) {
-        this.newName = newName;
+        newNameArr = newName.toCharArray();
         int length = newName.length();
         char[] name = new char[length];
         Arrays.fill(name,'A');
         int idx = 0;
-
-        while(true){
-            //name과 newName이 같아지면 반복 종료
-            if(new String(name).equals(newName))
-                break;
-
-            //이니셜이 A가 아니면 글자를 바꾸고 조작 횟수 카운트
-            char initial =  newName.charAt(idx);
-            if(initial != 'A'){
-                name[idx] = initial;
-                countToChange(initial);
+        //한번에 문자 변환 카운트
+        for(char letter:newNameArr){
+            if(letter != 'A'){
+                //count+=countToChange(letter);
             }
-            //다음 A가 아닌 곳까지 이동 후, 조작 횟수 카운트
-            idx = countToNext(idx);
-
         }
+        //coun+=countToMove();
         return count;
     }
-    private int nextIdxOf(int idx){ // idx 이후 A가 아닌 idx 찾기
-        int nextIdx =idx;
-        for(int i=idx+1; i<newName.length(); i++){
-            if (newName.charAt(i)!='A'){
-                return nextIdx = i;
+
+    private int[] nextMove(int idx){
+        int times = newNameArr.length;
+        Deque<Character> letters = new ArrayDeque();
+        for(char letter:newNameArr){
+            letters.add(letter);
+        }
+        for(int i=idx; i>=0; i-- ){
+            letters.add(letters.pop());
+        }
+        for(int t=1; t<times; t++){
+            char letter = letters.pop();
+            if(letter!='A')
+                return new int[]{t, (idx+t)%times};
+        }
+        return new int[]{0,0};
+    }
+
+    private int[] reverseMove(int idx){
+        int times = newNameArr.length;
+        Deque<Character> letters = new ArrayDeque();
+        for(char letter:newNameArr){
+            letters.add(letter);
+        }
+        for(int i=idx; i>0; i-- ){
+            letters.add(letters.pop());
+        }
+        for(int t=1; t<times; t++){
+            char letter = letters.removeLast();
+            if(letter!='A'){
+                int newIdx = idx-t<0? idx-t+times: idx-t;
+                return new int[]{t, newIdx};
+
             }
         }
-        return nextIdx;
+        return new int[]{0,0};
     }
 
-    private int countToNext(int idx) {
-        int nextIdx = nextIdxOf(idx);
-        int distance = nextIdx-idx; //idx -> nextIdx 앞으로 갔을 때
-        int reverseDistance = idx + newName.length() - nextIdx; //idx -> nextIdx 뒤로 갔을 때
-        int min = Math.min(distance, reverseDistance);//최소값
-        count+=min;
-        return nextIdx;
+
+    private int countToMove(int idx) {
+        Deque<Character> letters = new ArrayDeque();
+        for(char letter:newNameArr){
+            letters.add(letter);
+        }
+        return Math.min(countToMove(letters,1,1), countToMove(letters,-1,1));
     }
 
-    private int countToChange(char initial) {
-        int gap = initial-'A';
-        int move = gap<14 ? gap : 'Z'-initial+1;
-        count+=move;
-        return move;
+    private int countToMove(Deque letters, int next, int depth) {
+        if(depth == newNameArr.length-1)
+            return newNameArr.length-1;
+
+        return -0;
     }
 }
